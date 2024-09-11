@@ -1,0 +1,148 @@
+# 1. Modelagem Física - Conexão com o Banco de Dados
+
+## Modelagem Física
+
+A modelagem física é a etapa final na criação de um banco de dados, onde a estrutura lógica é transformada em um formato que pode ser efetivamente implementado em um sistema de gerenciamento de banco de dados (SGBD). Essa etapa inclui:
+
+- **Definição de Tabelas**: Estrutura que armazena dados. Cada tabela é composta por linhas (registros) e colunas (atributos).
+- **Índices**: Estruturas que melhoram a velocidade das operações de busca e acesso aos dados.
+- **Relacionamentos**: Definem como as tabelas estão conectadas entre si, geralmente através de chaves primárias e estrangeiras.
+
+## Conexão com o Banco de Dados
+
+Para se conectar a um banco de dados, você precisa fornecer informações como o nome do banco de dados, usuário e senha. A string de conexão varia conforme o SGBD. Aqui está um exemplo para SQLite, mas o processo é similar para outros SGBDs, como MySQL ou PostgreSQL, com variações na string de conexão.
+
+Exemplo de Conexão (em Python com SQLite):
+
+```python
+import sqlite3
+
+# Conectar ao banco de dados SQLite
+conn = sqlite3.connect('exemplo.db')  # 'exemplo.db' é o nome do arquivo do banco de dados
+
+# Criar um cursor para executar comandos SQL
+cursor = conn.cursor()
+
+# Realizar operações no banco de dados, como consultas e manipulações
+
+# Fechar o cursor e a conexão
+cursor.close()
+conn.close()
+```
+
+Nota: No exemplo acima, `conn` é o objeto de conexão e `cursor` é o objeto que permite executar comandos SQL.
+
+# 2. Operações CRUD
+
+## a) SELECT
+
+**Descrição**: O comando SELECT é utilizado para recuperar dados de uma ou mais tabelas no banco de dados. É possível especificar quais colunas você deseja retornar e aplicar condições para filtrar os resultados.
+
+**Sintaxe Básica**:
+
+```sql
+SELECT coluna1, coluna2, ...
+FROM nome_da_tabela
+WHERE condição;
+```
+
+**Exemplo de Código**:
+
+```sql
+-- Seleciona todos os registros da tabela 'clientes'
+SELECT * FROM clientes;
+
+-- Seleciona apenas os registros onde a idade é maior que 30
+SELECT nome, idade FROM clientes WHERE idade > 30;
+
+-- Seleciona registros com ordenação, por exemplo, por idade em ordem decrescente
+SELECT nome, idade FROM clientes ORDER BY idade DESC;
+```
+
+## b) INSERT
+
+**Descrição**: O comando INSERT é utilizado para adicionar novos registros a uma tabela. É necessário especificar a tabela e as colunas que receberão os valores.
+
+**Sintaxe Básica**:
+
+```sql
+INSERT INTO nome_da_tabela (coluna1, coluna2, ...)
+VALUES (valor1, valor2, ...);
+```
+
+**Exemplo de Código**:
+
+```sql
+-- Insere um novo registro na tabela 'clientes'
+INSERT INTO clientes (nome, idade, email)
+VALUES ('João Silva', 28, 'joao.silva@example.com');
+
+-- Inserir múltiplos registros de uma só vez
+INSERT INTO clientes (nome, idade, email)
+VALUES 
+    ('Maria Oliveira', 35, 'maria.oliveira@example.com'),
+    ('Carlos Souza', 40, 'carlos.souza@example.com');
+```
+
+## c) UPDATE
+
+**Descrição**: O comando UPDATE é utilizado para modificar dados existentes em uma tabela. É importante especificar a condição para garantir que apenas os registros desejados sejam atualizados.
+
+**Sintaxe Básica**:
+
+```sql
+UPDATE nome_da_tabela
+SET coluna1 = valor1, coluna2 = valor2, ...
+WHERE condição;
+```
+
+**Exemplo de Código**:
+
+```sql
+-- Atualiza a idade do cliente com ID 1
+UPDATE clientes
+SET idade = 29
+WHERE id = 1;
+
+-- Atualiza o e-mail de todos os clientes com nome 'João Silva'
+UPDATE clientes
+SET email = 'novo.email@example.com'
+WHERE nome = 'João Silva';
+```
+
+## d) DELETE
+
+**Descrição**: O comando DELETE é utilizado para remover registros de uma tabela. Assim como no UPDATE, é crucial usar uma condição para evitar a exclusão acidental de dados.
+
+**Sintaxe Básica**:
+
+```sql
+DELETE FROM nome_da_tabela
+WHERE condição;
+```
+
+**Exemplo de Código**:
+
+```sql
+-- Remove o cliente com ID 1
+DELETE FROM clientes
+WHERE id = 1;
+
+-- Remove todos os clientes com idade menor que 18
+DELETE FROM clientes
+WHERE idade < 18;
+```
+
+# Resumo
+
+- **Modelagem Física**: Refere-se à organização detalhada dos dados, definição de tabelas, índices, e relacionamentos. A conexão com o banco de dados envolve fornecer informações de acesso e usar uma string de conexão apropriada.
+
+- **Conexão com o Banco de Dados**: Estabelece a comunicação entre a aplicação e o banco de dados, permitindo a execução de comandos SQL.
+
+- **Operações CRUD**:
+  - SELECT: Recupera dados com a possibilidade de aplicar filtros e ordenação.
+  - INSERT: Adiciona novos registros à tabela.
+  - UPDATE: Modifica dados existentes na tabela.
+  - DELETE: Remove registros da tabela conforme uma condição.
+
+Esses comandos são fundamentais para a manipulação de dados em qualquer sistema de banco de dados relacional, possibilitando a criação, leitura, atualização e exclusão de dados conforme necessário para as aplicações.
