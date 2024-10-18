@@ -1,0 +1,39 @@
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background-image: url("https://images4.alphacoders.com/111/thumb-1920-1113643.png");
+  background-color: gray;
+
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  
+}
+
+form {
+  width: 200px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  color: #f6f6f6;
+  border-radius: 15px;
+}
+
+label{
+    margin: 20px;
+}
+
+input{
+    margin: 0 10px;
+    border: 2px solid #27461f;
+    box-shadow: 0 0 0 0;
+    outline: 0;
+    border-radius: 10px;
+    color: white;
+}
